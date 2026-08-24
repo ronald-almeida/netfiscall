@@ -18,7 +18,7 @@ body{
   background:var(--bg);
   color:var(--text);
 }
-button,input,select,textarea{font:inherit}
+button,input,select,textarea{font:inherit;touch-action:manipulation}
 button{cursor:pointer}
 .hidden{display:none!important}
 
@@ -372,20 +372,25 @@ button{cursor:pointer}
   .step-number{font-size:23px}
   .step-title strong{font-size:14px}
   .divider{margin:18px 0 12px}
-  .field{margin-bottom:12px}
+  .field{margin-bottom:14px}
+  .field>span{font-size:13px}
   .field input,.field select,.phone-box{
-    height:42px;
-    font-size:13px;
+    height:48px;
+    font-size:16px;
   }
-  .phone-box{grid-template-columns:98px 1fr}
-  .phone-box input{font-size:13px}
-  .primary-btn{min-height:40px;font-size:12px}
+  .field input,.field select,.phone-box input{
+    font-size:16px!important;
+    line-height:1.2;
+  }
+  .phone-box{grid-template-columns:102px 1fr}
+  .phone-box .prefix{font-size:13px}
+  .primary-btn,.buy-btn{min-height:48px;font-size:14px}
   .next-btn{margin-top:24px}
-  .back-btn{margin-bottom:6px}
-  .payment-method{width:56px;height:60px}
-  .pix-help{margin:38px 0 14px;font-size:11px}
-  .legal{font-size:9px}
-  .secure-note{font-size:10px}
+  .back-btn{margin-bottom:8px;font-size:12px}
+  .payment-method{width:62px;height:64px}
+  .pix-help{margin:34px 0 14px;font-size:12px}
+  .legal{font-size:10px}
+  .secure-note{font-size:11px}
 
   .modal{
     align-items:end;
@@ -407,11 +412,16 @@ button{cursor:pointer}
   .modal-pix-icon{width:40px;height:40px;flex-basis:40px}
   .amount-card{margin:13px 0 11px;padding:10px 12px}
   .amount-card strong{font-size:17px}
-  .modal-instruction{font-size:11px;margin-bottom:11px}
+  .modal-instruction{font-size:12px;margin-bottom:11px}
   .qr-shell{width:min(230px,74vw);padding:8px;margin-bottom:11px}
   .qr-container{min-height:205px}
-  #pixCode{min-height:62px;font-size:9px}
-  .copy-btn{min-height:48px}
+  #pixCode{
+    min-height:72px;
+    font-size:16px!important;
+    line-height:1.35;
+    word-break:break-all;
+  }
+  .copy-btn{min-height:50px;font-size:14px}
 }
 @media(max-width:385px){
   .product-head{grid-template-columns:102px 1fr;padding-left:16px;padding-right:16px}
