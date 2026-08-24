@@ -1,0 +1,9 @@
+{
+  "name": "netfiscall-checkout-payshark",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing e checkout NetFiscal com PayShark PIX.",
+  "engines": {
+    "node": ">=20"
+  }
+}

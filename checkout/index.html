@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>MBA - Turma 4 | Checkout NetFiscal</title>
+  <meta name="description" content="Checkout MBA Reforma Tributária & Gestão Tributária - NetFiscal" />
+  <link rel="stylesheet" href="/checkout/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+  <script src="/checkout/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a href="/landing/" class="brand" aria-label="Voltar para a NetFiscal">
+      <span class="brand-mark">NF</span>
+      <span class="brand-name">NETFISCAL</span>
+    </a>
+    <div class="progress-dots" aria-label="Progresso do checkout">
+      <span class="progress-dot active" data-progress="1"></span>
+      <span class="progress-dot" data-progress="2"></span>
+      <span class="progress-dot" data-progress="3"></span>
+    </div>
+  </header>
+
+  <main class="page">
+    <aside class="summary-wrap">
+      <section class="summary-card" aria-label="Resumo do produto">
+        <div class="secure-title"><span class="shield">◒</span> COMPRA 100% SEGURA</div>
+        <div class="product-head">
+          <img class="mba-logo" src="https://netfiscal.net/wp-content/uploads/2026/05/logo-mba.webp" alt="MBA Reforma Tributária e Gestão Tributária" />
+          <div class="product-copy">
+            <h1>#MBA - TURMA 4 (08/26)</h1>
+            <div class="price">R$ 599,40</div>
+          </div>
+        </div>
+        <dl class="seller-details">
+          <div><dt>Autor</dt><dd>NETFISCAL</dd></div>
+          <div><dt>E-mail</dt><dd>suporte@netfiscal.net</dd></div>
+          <div><dt>Telefone</dt><dd>(11) 91399-9991</dd></div>
+        </dl>
+      </section>
+    </aside>
+
+    <section class="checkout-card">
+      <form id="checkoutForm" novalidate>
+        <section class="step active" data-step="1">
+          <div class="step-title">
+            <div><span class="step-number">01</span><strong>Dados pessoais</strong></div>
+            <button type="button" class="country-btn" aria-label="País Brasil"><span>🇧🇷</span> Alterar país <span>⌄</span></button>
+          </div>
+          <div class="divider"></div>
+
+          <label class="field"><span>Nome completo do aluno</span><input id="name" autocomplete="name" placeholder="Digite seu nome completo" required /></label>
+          <label class="field"><span>E-mail</span><input id="email" type="email" autocomplete="email" placeholder="E-mail que receberá o produto" required /></label>
+          <label class="field"><span>Telefone</span><div class="phone-box"><span class="prefix">🇧🇷 <b>+55</b>⌄</span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Número do telefone *" required /></div></label>
+          <label class="field"><span>CPF do Aluno</span><input id="taxId" type="text" inputmode="numeric" placeholder="Informe o CPF do Aluno" required /></label>
+
+          <p id="step1Message" class="step-message" role="alert"></p>
+          <button id="goAddressBtn" class="primary-btn next-btn" type="button">Próxima etapa</button>
+          <div class="legal">Ao avançar, eu concordo com os termos desta oferta, com os Termos de Uso e com a Política de Privacidade da NETFISCAL.</div>
+          <div class="secure-note">🔒 <span>Informações seguras e criptografadas</span></div>
+        </section>
+
+        <section class="step" data-step="2">
+          <button class="back-btn" type="button" data-back="1">← Voltar</button>
+          <div class="step-title centered"><div><span class="step-number">02</span><strong>Endereço de entrega</strong></div></div>
+          <div class="divider"></div>
+
+          <label class="field"><span>CEP</span><input id="zipCode" inputmode="numeric" autocomplete="postal-code" placeholder="CEP" required /></label>
+          <label class="field"><span>Endereço</span><input id="street" autocomplete="address-line1" placeholder="Informe o endereço" required /></label>
+          <label class="field"><span>Número</span><input id="number" autocomplete="address-line2" placeholder="Número" required /></label>
+          <label class="field"><span>Cidade</span><input id="city" autocomplete="address-level2" placeholder="Cidade" required /></label>
+          <label class="field"><span>Bairro</span><input id="district" placeholder="Bairro" required /></label>
+          <label class="field"><span>Complemento</span><input id="complement" placeholder="Complemento do endereço" /></label>
+          <label class="field"><span>Estado</span><select id="state" autocomplete="address-level1" required>
+            <option value="">Estado</option><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
+          </select></label>
+
+          <p id="step2Message" class="step-message" role="alert"></p>
+          <button id="goPaymentBtn" class="primary-btn next-btn" type="button">Próxima etapa</button>
+          <div class="legal">Os dados de endereço são usados para cadastro e atendimento. O produto é digital e o endereço não é enviado à PayShark como entrega.</div>
+          <div class="secure-note">🔒 <span>Informações seguras e criptografadas</span></div>
+        </section>
+
+        <section class="step" data-step="3">
+          <button class="back-btn" type="button" data-back="2">← Voltar</button>
+          <div class="step-title centered"><div><span class="step-number">03</span><strong>Pagamento</strong></div></div>
+          <div class="divider"></div>
+
+          <div class="payment-method selected" aria-label="Pagamento via Pix"><span class="pix-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.59935 5.63592C5.50809 5.63592 5.46239 5.52558 5.52692 5.46105L8.27602 2.71191C9.22885 1.7627 10.7708 1.7627 11.7237 2.71191L14.4728 5.46105C14.5373 5.52558 14.4916 5.63592 14.4004 5.63592C13.8185 5.63592 13.2693 5.8614 12.8584 6.276L10.3853 8.73813C10.1708 8.9527 9.82892 8.9527 9.61435 8.73813L7.14134 6.276C6.73039 5.8614 6.18124 5.63592 5.59935 5.63592Z" fill="currentColor"/><path d="M14.4004 14.3652C14.4916 14.3652 14.5373 14.4755 14.4728 14.5401L11.7237 17.2892C10.7708 18.2384 9.22885 18.2384 8.27602 17.2892L5.52692 14.5401C5.46239 14.4755 5.50809 14.3652 5.59935 14.3652C6.18124 14.3652 6.73039 14.1397 7.14134 13.7251L9.61435 11.263C9.82892 11.0484 10.1708 11.0484 10.3853 11.263L12.8584 13.7251C13.2693 14.1397 13.8185 14.3652 14.4004 14.3652Z" fill="currentColor"/><path d="M17.2881 11.724L16.0643 12.9477C15.6231 13.389 15.0246 13.6369 14.4005 13.6369C14.0114 13.6369 13.6477 13.4842 13.3713 13.2114L10.8983 10.7457C10.4037 10.251 9.59632 10.251 9.10172 10.7457L6.62871 13.2114C6.35231 13.4842 5.98864 13.6369 5.5995 13.6369C4.97544 13.6369 4.37694 13.389 3.93566 12.9477L2.7119 11.724C1.7627 10.7711 1.7627 9.2291 2.7119 8.27625L3.93566 7.05247C4.37694 6.61119 4.97544 6.36328 5.5995 6.36328C5.98864 6.36328 6.35231 6.51603 6.62871 6.78879L9.10172 9.25456C9.34902 9.50186 9.67633 9.62551 10 9.62551C10.3237 9.62551 10.651 9.50186 10.8983 9.25456L13.3713 6.78879C13.6477 6.51603 14.0114 6.36328 14.4005 6.36328C15.0246 6.36328 15.6231 6.61119 16.0643 7.05247L17.2881 8.27625C18.2373 9.2291 18.2373 10.7711 17.2881 11.724Z" fill="currentColor"/></svg></span><span>Pix</span></div>
+          <p class="pix-help">Ao finalizar a compra, será gerado um QR Code e um código Pix Copia e Cola para pagamento.</p>
+          <p id="formMessage" class="form-message" role="alert" aria-live="polite"></p>
+          <button id="generatePixBtn" class="primary-btn buy-btn" type="submit">Comprar agora</button>
+          <div class="legal">Ao clicar em “Comprar agora”, eu concordo que a NETFISCAL processe os dados informados para concluir este pedido e com os termos desta oferta e Política de Privacidade.</div>
+          <div class="secure-note">🔒 <span>Informações seguras e criptografadas</span></div>
+        </section>
+      </form>
+    </section>
+  </main>
+
+  <div id="pixModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="pixModalTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card">
+      <div class="modal-handle"></div>
+      <button class="modal-close" data-close-modal type="button" aria-label="Fechar">×</button>
+      <div class="modal-heading"><div class="modal-pix-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.59935 5.63592C5.50809 5.63592 5.46239 5.52558 5.52692 5.46105L8.27602 2.71191C9.22885 1.7627 10.7708 1.7627 11.7237 2.71191L14.4728 5.46105C14.5373 5.52558 14.4916 5.63592 14.4004 5.63592C13.8185 5.63592 13.2693 5.8614 12.8584 6.276L10.3853 8.73813C10.1708 8.9527 9.82892 8.9527 9.61435 8.73813L7.14134 6.276C6.73039 5.8614 6.18124 5.63592 5.59935 5.63592Z" fill="currentColor"/><path d="M14.4004 14.3652C14.4916 14.3652 14.5373 14.4755 14.4728 14.5401L11.7237 17.2892C10.7708 18.2384 9.22885 18.2384 8.27602 17.2892L5.52692 14.5401C5.46239 14.4755 5.50809 14.3652 5.59935 14.3652C6.18124 14.3652 6.73039 14.1397 7.14134 13.7251L9.61435 11.263C9.82892 11.0484 10.1708 11.0484 10.3853 11.263L12.8584 13.7251C13.2693 14.1397 13.8185 14.3652 14.4004 14.3652Z" fill="currentColor"/><path d="M17.2881 11.724L16.0643 12.9477C15.6231 13.389 15.0246 13.6369 14.4005 13.6369C14.0114 13.6369 13.6477 13.4842 13.3713 13.2114L10.8983 10.7457C10.4037 10.251 9.59632 10.251 9.10172 10.7457L6.62871 13.2114C6.35231 13.4842 5.98864 13.6369 5.5995 13.6369C4.97544 13.6369 4.37694 13.389 3.93566 12.9477L2.7119 11.724C1.7627 10.7711 1.7627 9.2291 2.7119 8.27625L3.93566 7.05247C4.37694 6.61119 4.97544 6.36328 5.5995 6.36328C5.98864 6.36328 6.35231 6.51603 6.62871 6.78879L9.10172 9.25456C9.34902 9.50186 9.67633 9.62551 10 9.62551C10.3237 9.62551 10.651 9.50186 10.8983 9.25456L13.3713 6.78879C13.6477 6.51603 14.0114 6.36328 14.4005 6.36328C15.0246 6.36328 15.6231 6.61119 16.0643 7.05247L17.2881 8.27625C18.2373 9.2291 18.2373 10.7711 17.2881 11.724Z" fill="currentColor"/></svg></div><div><span class="eyebrow">Pagamento via Pix</span><h2 id="pixModalTitle">Finalize sua matrícula</h2></div></div>
+      <div class="amount-card"><span>Valor total</span><strong>R$ 599,40</strong></div>
+      <p class="modal-instruction">Escaneie o QR Code com o aplicativo do seu banco ou copie o código Pix abaixo.</p>
+      <div class="qr-shell"><div id="modalQr" class="qr-container"></div></div>
+      <label class="pix-code-label" for="pixCode">Pix Copia e Cola</label>
+      <textarea id="pixCode" rows="3" readonly></textarea>
+      <button id="copyPixBtn" class="copy-btn" type="button">Copiar código Pix</button>
+      <div class="modal-secure">🔒 Pagamento seguro e criptografado</div>
+    </div>
+  </div>
+</body>
+</html>
