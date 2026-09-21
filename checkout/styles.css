@@ -228,6 +228,19 @@ button{cursor:pointer}
 }
 .buy-btn{min-height:42px}
 
+.checkout-info-section{
+  width:min(1040px,calc(100% - 32px));
+  margin:0 auto 48px;
+  display:flex;
+  justify-content:center;
+}
+.checkout-info-image{
+  display:block;
+  width:min(370px,100%);
+  height:auto;
+}
+.checkout-info-image:not([src]){display:none}
+
 .modal.hidden{display:none}
 .modal{
   position:fixed;inset:0;z-index:1000;
@@ -321,6 +334,7 @@ button{cursor:pointer}
   }
   .summary-wrap{position:static;width:100%}
   .checkout-card{width:100%}
+  .checkout-info-section{width:min(500px,calc(100% - 20px));}
 }
 @media(max-width:560px){
   body{background:#f6f7f9}
@@ -392,6 +406,8 @@ button{cursor:pointer}
   .pix-help{margin:34px 0 14px;font-size:12px}
   .legal{font-size:10px}
   .secure-note{font-size:11px}
+  .checkout-info-section{width:100%;margin:0 auto 28px;padding:0 7px}
+  .checkout-info-image{width:100%;max-width:370px}
 
   .modal{
     align-items:end;
