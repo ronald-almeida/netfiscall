@@ -245,26 +245,3 @@ document.addEventListener('keydown', (event) => {
 validateStudent(false);
 validateAddress(false);
 
-
-async function loadCheckoutInfoImage() {
-  const image = document.getElementById('checkoutInfoImage');
-  if (!image) return;
-  try {
-    const paths = [
-      '/checkout/assets/mba-info.part1',
-      '/checkout/assets/mba-info.part2',
-      '/checkout/assets/mba-info.part3',
-      '/checkout/assets/mba-info.part4'
-    ];
-    const parts = await Promise.all(paths.map(async (path) => {
-      const response = await fetch(path);
-      if (!response.ok) throw new Error('Falha ao carregar imagem informativa.');
-      return response.text();
-    }));
-    image.src = 'data:image/webp;base64,' + parts.join('');
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-loadCheckoutInfoImage();
