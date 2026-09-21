@@ -234,12 +234,120 @@ button{cursor:pointer}
   display:flex;
   justify-content:center;
 }
-.checkout-info-image{
-  display:block;
+.mba-info-art{
   width:min(370px,100%);
-  height:auto;
+  background:
+    linear-gradient(rgba(17,24,39,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(17,24,39,.035) 1px,transparent 1px),
+    #fff;
+  background-size:28px 28px;
+  border-top:5px solid #ff4b2b;
+  border-bottom:5px solid #ff4b2b;
+  padding:62px 9px 78px;
+  text-align:center;
+  overflow:hidden;
 }
-.checkout-info-image:not([src]){display:none}
+.mba-art-brand{display:grid;justify-items:center}
+.mba-art-logo{
+  position:relative;
+  display:inline-flex;
+  align-items:flex-end;
+  justify-content:center;
+  min-width:262px;
+  padding:0 20px 4px;
+  border-radius:20px;
+  background:linear-gradient(180deg,#ff5332,#ff431f);
+  color:#fff;
+  font-size:92px;
+  line-height:.88;
+  font-weight:900;
+  letter-spacing:-7px;
+}
+.mba-plus{
+  position:absolute;
+  left:22px;
+  bottom:5px;
+  font-size:38px;
+  line-height:1;
+  letter-spacing:0;
+}
+.mba-art-title{
+  display:grid;
+  justify-items:center;
+  gap:4px;
+  margin-top:31px;
+  line-height:1;
+}
+.mba-art-title span{
+  display:inline-block;
+  padding:2px 9px 4px;
+  border-radius:9px;
+  background:linear-gradient(180deg,#ff5332,#ff431f);
+  color:#fff;
+  font-size:37px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+.mba-art-title strong{
+  display:block;
+  color:#202124;
+  font-size:38px;
+  line-height:1.08;
+  font-weight:900;
+  letter-spacing:.2px;
+}
+.mba-benefits-card{
+  margin-top:52px;
+  padding:36px 18px 34px;
+  border:2px solid #e7e7e7;
+  border-radius:23px;
+  background:rgba(255,255,255,.93);
+  box-shadow:0 2px 8px rgba(0,0,0,.025);
+  text-align:left;
+}
+.mba-benefit{
+  display:grid;
+  grid-template-columns:26px 1fr;
+  align-items:center;
+  gap:9px;
+  min-height:41px;
+  color:#080808;
+  font-size:18px;
+  line-height:1.2;
+}
+.benefit-check{
+  width:21px;
+  height:21px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#1497e8;
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  box-shadow:0 0 0 3px #1497e8;
+}
+.mba-benefit strong{font-weight:900}
+.mba-access-badge{
+  width:max-content;
+  max-width:90%;
+  margin:54px auto 0;
+  padding:9px 18px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  background:linear-gradient(180deg,#ff431c,#f03208);
+  color:#fff;
+  font-size:20px;
+  line-height:1;
+  box-shadow:0 5px 14px rgba(240,50,8,.14);
+}
+.access-lock{
+  font-size:16px;
+  transform:rotate(0deg);
+}
 
 .modal.hidden{display:none}
 .modal{
@@ -407,7 +515,7 @@ button{cursor:pointer}
   .legal{font-size:10px}
   .secure-note{font-size:11px}
   .checkout-info-section{width:100%;margin:0 auto 28px;padding:0 7px}
-  .checkout-info-image{width:100%;max-width:370px}
+  .mba-info-art{width:100%;max-width:370px}
 
   .modal{
     align-items:end;
