@@ -1,11 +1,10 @@
-const API_BASE = 'https://api.gatewaypayshark.com.br';
+const API_BASE = 'https://api.blackcatoficial.com/api';
 
 const PRODUCT = Object.freeze({
-  name: '#MBA - TURMA 4 (08/26)',
-  description: 'MBA Reforma Tributária & Gestão Tributária - Turma 4 (08/26)',
+  name: '#MBA - TURMA 5 (09/26)',
+  description: 'MBA Reforma Tributária & Gestão Tributária - Turma 5 (09/26)',
   amount: 59940,
-  currency: 'BRL',
-  type: 'DIGITAL'
+  currency: 'BRL'
 });
 
 function digits(value = '') {
@@ -74,7 +73,7 @@ function parseBody(req) {
 }
 
 function makeExternalRef() {
-  return `netfiscal_mba_t4_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  return `netfiscal_mba_t5_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
 }
 
 module.exports = async function handler(req, res) {
@@ -86,9 +85,10 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({
       success: true,
       service: 'create-pix',
+      provider: 'blackcat',
       product: PRODUCT.name,
       amount: PRODUCT.amount,
-      apiKeyConfigured: Boolean(String(process.env.PAYSHARK_API_KEY || '').trim())
+      apiKeyConfigured: Boolean(String(process.env.BLACKCAT_API_KEY || '').trim())
     });
   }
 
@@ -101,10 +101,10 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const apiKey = String(process.env.PAYSHARK_API_KEY || '').trim();
+    const apiKey = String(process.env.BLACKCAT_API_KEY || '').trim();
 
     if (!apiKey) {
-      console.error('PAYSHARK_API_KEY não configurada.');
+      console.error('BLACKCAT_API_KEY não configurada.');
       return res.status(500).json({
         success: false,
         message: 'Configuração de pagamento indisponível.'
@@ -126,44 +126,47 @@ module.exports = async function handler(req, res) {
     }
 
     const externalRef = makeExternalRef();
+    const documentType = student.taxId.length === 14 ? 'cnpj' : 'cpf';
 
     const payload = {
       amount: PRODUCT.amount,
       currency: PRODUCT.currency,
-      method: 'PIX',
-      description: PRODUCT.description,
-      externalRef,
-      payer: {
-        name: student.name,
-        taxId: student.taxId,
-        email: student.email,
-        phone: student.phone
-      },
+      paymentMethod: 'pix',
       items: [
         {
+          title: PRODUCT.name,
+          unitPrice: PRODUCT.amount,
           quantity: 1,
-          name: PRODUCT.name,
-          price: PRODUCT.amount,
-          type: PRODUCT.type
+          tangible: false
         }
-      ]
+      ],
+      customer: {
+        name: student.name,
+        email: student.email,
+        phone: student.phone,
+        document: {
+          number: student.taxId,
+          type: documentType
+        }
+      },
+      pix: {
+        expiresInDays: 1
+      },
+      metadata: PRODUCT.description,
+      externalRef
     };
-
-    // O endereço é coletado no checkout, mas este produto é DIGITAL.
-    // Não enviamos delivery/address à PayShark para evitar validações
-    // desnecessárias como complement=null ou formatos de endereço.
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
     let providerResponse;
 
     try {
-      providerResponse = await fetch(`${API_BASE}/v1/payment`, {
+      providerResponse = await fetch(`${API_BASE}/sales/create-sale`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          Authorization: `Bearer ${apiKey}`
+          'X-API-Key': apiKey
         },
         body: JSON.stringify(payload),
         signal: controller.signal
@@ -181,33 +184,37 @@ module.exports = async function handler(req, res) {
       data = { message: raw || 'Resposta inválida do gateway.' };
     }
 
-    if (!providerResponse.ok) {
-      console.error('Erro PayShark:', providerResponse.status, data);
+    if (!providerResponse.ok || data?.success === false) {
+      console.error('Erro BlackCat:', providerResponse.status, data);
 
       return res.status(providerResponse.status >= 500 ? 502 : providerResponse.status).json({
         success: false,
-        message: data?.message || data?.errorMessage || 'Não foi possível gerar o Pix.',
+        message: data?.message || data?.error || 'Não foi possível gerar o Pix.',
         gatewayStatus: providerResponse.status,
-        details: data?.errors || data?.error || data?.details || null
+        details: data?.errors || data?.details || null
       });
     }
 
-    const pixCode = data?.data?.copypaste;
+    const paymentData = data?.data?.paymentData || {};
+    const pixCode = paymentData?.copyPaste || paymentData?.qrCode || null;
+    const transactionId = data?.data?.transactionId || null;
 
     if (!pixCode) {
-      console.error('Resposta sem data.copypaste:', data);
+      console.error('Resposta BlackCat sem código Pix:', data);
       return res.status(502).json({
         success: false,
-        message: 'O gateway não retornou o código Pix.'
+        message: 'A BlackCat não retornou o código Pix.'
       });
     }
 
     return res.status(200).json({
       success: true,
-      paymentId: data?.id || null,
+      paymentId: transactionId,
       externalRef,
       amount: PRODUCT.amount,
-      pixCode
+      pixCode,
+      invoiceUrl: data?.data?.invoiceUrl || null,
+      expiresAt: paymentData?.expiresAt || null
     });
   } catch (error) {
     if (error?.name === 'AbortError') {
